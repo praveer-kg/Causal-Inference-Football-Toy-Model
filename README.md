@@ -1,7 +1,4 @@
-<!doctype html>
-<html>
- <head>Causal Inference Football</head>
-<body>
+theme: jekyll-theme-minimal
 
 <h1> Toy Model for Causal Effect of Possession on Expected Goals</h1>
 <h2>Introduction</h2>
@@ -227,6 +224,4 @@ response(data,"Touches","xG",["Revenue","Venue"])
 <h2>Discussion</h2>
 The Dose-Response curve shows clearly that the strength of the correlation drops when controlling for club revenue and match venue. In fact, more Possession is conducive to creating more xG upto a certain dosage. Increments in Possession beyond this point have detrimental effects, perhaps explained by the fact that agressive strategies lead to more chance creation but also more turnovers(loss of Possession), assuming of course that our DAG is accurate. However, as mentioned earlier, the assumptions made here are an oversimplification of reality. For example, the revenue(R) is more likely to affect other factors(squad composition, manager choice etc.) that could themselves be confounders under certain circumstances. Perhaps using goals scored(GF) would ameliorate the issue since manager influence is greatly reduced in finishing chances rather than creating them. With that, I will conclude this discussion and thank the reader who has made it this far. 
 </p>
- 
-</body>
-</html>
+

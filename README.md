@@ -1,4 +1,4 @@
-theme: jekyll-theme-minimal
+
 
 <h1> Toy Model for Causal Effect of Possession on Expected Goals</h1>
 <h2>Introduction</h2>

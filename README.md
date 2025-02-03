@@ -1,4 +1,4 @@
-<script src="https://rawcdn.githack.com/oscarmorrison/md-page/master/md-page.js"></script><noscript>
+markdown: kramdown
 
 <h1> Toy Model for Causal Effect of Possession on Expected Goals</h1>
 <h2>Introduction</h2>

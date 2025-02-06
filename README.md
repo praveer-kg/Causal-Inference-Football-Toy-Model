@@ -54,7 +54,7 @@ def teams_list(season):
     opponents= cols[cols['Rk']%2==0]
     teams.reset_index(drop=True,inplace=True)
     opponents.reset_index(drop=True,inplace=True)
-    print("Done")
+    print("Done \n")
     return teams,opponents
     
 Teams,Opponents = teams_list('2022-2023')
@@ -81,10 +81,11 @@ def fixtures_table(team,team_link,opponents):
     return fixtures
 
 Fixtures={}
-
+print("Collecting fixtures for")
 for i in tqdm.tqdm(range(len(Teams))):
-    print("Collecting fixtures for", Teams.iloc[i,1]+ "...")
+    print(Teams.iloc[i,1]+ "...")
     Fixtures[Teams.iloc[i,1]] = fixtures_table(Teams.iloc[i,1], Teams.iloc[i,2],Opponents)
+print("Fixtures list complete \n")
 
 ```
 
@@ -105,19 +106,20 @@ def metrics(link):
     touches = df0['Touches'].iloc[-1]
     return touches,xA
     
+print("Collecting Metrics for")
 for key in Fixtures:
-    
+    print(key+"...")
     DF = Fixtures[key]
     DF['Team']=key
     dflinks = DF['Match Report']
-    DF[['Touches']], DF[['xA']]=dflinks.apply(metrics)
+    DF[['Touches','xA' ]] = pd.DataFrame(dflinks.apply(metrics).tolist(), index=DF.index)
 ```
 Once the revenues of the relevant teams are manually added in as well, all of the data is consolidated into the Data Frame 'Data' for ease of access and analysis:
 
 ```python
-rev = {'Almería':45.09,'Atlético Madrid':120.43,'Barcelona':155.1,'Celta Vigo':51.17,'Espanyol':51.24,'Getafe':53.38,'Mallorca':45.04,'Osasuna':49.65,'Rayo Vallecano':45.97,'Villareal':63.35}
-data = pd.concat(Fixtures.values(),ignore_index =True)
-data['Revenue']=data['Team'].map(rev)
+rev = {'Almería':45.09,'Atlético Madrid':120.43,'Barcelona':155.1,'Celta Vigo':51.17,'Espanyol':51.24,'Getafe':53.38,'Mallorca':45.04,'Osasuna':49.65,'Rayo Vallecano':45.97,'Villarreal':63.35}
+Data = pd.concat(Fixtures.values(),ignore_index =True)
+Data['Revenue']=Data['Team'].map(rev)
 ```
 <u> Note</u>: The functions above require lxml and html5lib for error-free execution.
  
@@ -143,7 +145,6 @@ def LR(data,xvar,yvar):
     plt.legend()
     print(model_sm.summary())
     return
-LR(Data,"Touches","xG")
 
 ```
  
@@ -191,6 +192,7 @@ The corresponding weight $w_i$ is equal to the inverse of this density at a give
 ```python
 
 def response(data,xvar,yvar,confs):
+
     confounders = ""
     for conf in confs:
         if type(conf[0])==str:
@@ -219,7 +221,9 @@ def response(data,xvar,yvar,confs):
     ax.set_xlabel(xvar,fontsize=18)
     ax.set_ylabel(yvar,fontsize=18)
     return
-response(data,"Touches","xG",["Revenue","Venue"])
+
+response(Data,"Touches","xG",["Revenue","Venue"])
+LR(Data,"Touches","xG")
 ```
  
  | ![Dose_Response.jpg](https://github.com/praveer-kg/Causal-Inference-Football-Toy-Model/blob/main/Files/Dose-Response.png) | 

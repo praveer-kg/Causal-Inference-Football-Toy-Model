@@ -30,7 +30,7 @@ def teams_list(season):
     opponents= cols[cols['Rk']%2==0]
     teams.reset_index(drop=True,inplace=True)
     opponents.reset_index(drop=True,inplace=True)
-    print("Done")
+    print("Done \n")
     return teams,opponents
     
 
@@ -119,7 +119,7 @@ print("Collecting fixtures for")
 for i in tqdm.tqdm(range(len(Teams))):
     print(Teams.iloc[i,1]+ "...")
     Fixtures[Teams.iloc[i,1]] = fixtures_table(Teams.iloc[i,1], Teams.iloc[i,2],Opponents)
-print("Fixtures list complete")
+print("Fixtures list complete \n")
 
 print("Collecting Metrics for")
 for key in Fixtures:
@@ -133,5 +133,5 @@ rev = {'Almería':45.09,'Atlético Madrid':120.43,'Barcelona':155.1,'Celta Vigo'
 Data = pd.concat(Fixtures.values(),ignore_index =True)
 Data['Revenue']=Data['Team'].map(rev)
 
-response(Data,"Touches","xG",["Revenue"])
+response(Data,"Touches","xG",["Revenue","Venue"])
 LR(Data,"Touches","xG")

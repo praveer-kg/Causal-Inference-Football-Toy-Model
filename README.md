@@ -162,6 +162,11 @@ With Touches as the independent variable and xG as the dependent one, a summary 
 </p>
 <p>The following code performs a linear regression analysis between these pairs of variables.<br>
 
+```python
+LR(Data,"xA","xG")
+LR(Data,"xG","GF")
+```
+
  | ![xG_vs_xA.jpg](https://github.com/praveer-kg/Causal-Inference-Football-Toy-Model/blob/main/Files/xG_vs_xA.png) | 
 |:--:| 
 | Figure 3: Regression Plot and Summary for Expected Goals vs Expected Assists |

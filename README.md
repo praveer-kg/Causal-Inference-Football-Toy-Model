@@ -2,8 +2,8 @@
 
 <h1> Toy Model for Causal Effect of Possession on Expected Goals</h1>
 <h2>Introduction</h2>
-<p align="justify">Possession in football is one of the most popular metrics used to guage a team's performance in a given game, tournament or season. Qualitatively, a higher share of posesssion is associated with a team that dominates the flow and tempo of a game. Quantitatively, it is well known that a team’s share of possession is correlated with the number of goals scored and chances created. However, the enduring success of counter-attacking football&mdash; exemplified by infamous victories of Chelsea, Inter Milan and Bayern Munich over possession-heavy 2010s Barcelona&mdash; begs the question of whether causation really underpins this correlation. <br>
-Causal Inference techniques have been developed to answer precisely such a question when confounding factors can be identified.<p>
+<p align="justify">Possession in football is one of the most popular metrics used to guage a team's performance in a given game, tournament or season. Qualitatively, a higher share of posesssion is associated with a team that dominates the flow and tempo of a game. Quantitatively, it is well known that a team’s share of possession is correlated with the number of goals scored and chances created. However, the enduring success of counter-attacking football&mdash; exemplified by infamous victories of Chelsea, Inter Milan and Bayern Munich over possession-heavy 2010s Barcelona&mdash; in conjunction with the struggles of possession-based Spanish NT squads during 2014-2024, begs the question of whether causation really underpins this correlation. <br>
+Causal Inference techniques have been developed to answer precisely such a question when confounding factors can be identified and quantified.<p>
 
 <h2>Causal Inference</h2>
 Causal Inference(CI) methods were developed to faciliate the inference of causal relationships from observational data, in the absence of randomized controlled trials(RCTs). The standard trial involves a binary treatment(eg. drug administered or not) on a group of participants, selected carefully to represent a uniform distrubution of attributes(age,gender, etc.). The outcome(eg: incidence) is monitored over a period of time to provide insights into the efficacy of treatment. Using CI techniques, it is possible to replicate the benifits of an RCT while avoiding its drawbacks. The standard procedure is to regress the treatment variable against the confounders to obtain a distribution for the treatment. The outcome is then regressed against this distribution with weights determined by inverse probability of treatment(IPWT). For the question of Possession vs Expected Goals in football, the treatment(Touches taken) not being a binary variable calls for the application of continuous treatment CI methods. More information about such methods is available in this article.
@@ -61,7 +61,7 @@ Teams,Opponents = teams_list('2022-2023')
 
 ```
 
-The function $fixtures\textunderscore table$  reads in data from <var>Teams</var> and <var>Opponents</var> to create a dictionary of Data Frames, one for each team. These DFs contain general data about individual fixtures as well as links to detailed match reports for each fixture.
+The function $fixtures\textunderscore table$  reads in data from <var>Teams</var> and <var>Opponents</var> to create a dictionary of Data Frames, one for each team. These DFs contain general data about individual fixtures as well as links to detailed match reports for each fixture:
 
 ```python
 def fixtures_table(team,team_link,opponents):
@@ -88,7 +88,7 @@ for i in tqdm.tqdm(range(len(Teams))):
 
 ```
 
-Finally, the function $metrics$ uses these links to provide advanced statistics from the match reports.
+Finally, the function $metrics$ uses these links to provide advanced statistics from the match reports:
 
 ```python
 
@@ -112,7 +112,7 @@ for key in Fixtures:
     dflinks = DF['Match Report']
     DF[['Touches']], DF[['xA']]=dflinks.apply(metrics)
 ```
-Once the revenues of the relevant are manually added in as well, all of the data is consolidated into the Data Frame 'Data' for ease of access and analysis.
+Once the revenues of the relevant teams are manually added in as well, all of the data is consolidated into the Data Frame 'Data' for ease of access and analysis:
 
 ```python
 rev = {'Almería':45.09,'Atlético Madrid':120.43,'Barcelona':155.1,'Celta Vigo':51.17,'Espanyol':51.24,'Getafe':53.38,'Mallorca':45.04,'Osasuna':49.65,'Rayo Vallecano':45.97,'Villareal':63.35}

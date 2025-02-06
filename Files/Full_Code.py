@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This program scrapes football data from fbref.com and analyzes it using continuous-treatment Causal Inference methods
 """
